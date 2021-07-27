@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_clone_youtube_getx/app/binding/init_binding.dart';
 import 'package:flutter_clone_youtube_getx/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      initialBinding: InitBinding(),
       initialRoute: '/',
       getPages: AppPages.pages,
     );
