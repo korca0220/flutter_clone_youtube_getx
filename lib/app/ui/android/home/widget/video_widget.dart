@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clone_youtube_getx/app/data/model/video.dart';
+import 'package:intl/intl.dart';
 
 class VideoWidget extends StatelessWidget {
+  final Video video;
+  const VideoWidget({
+    required this.video,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,8 +22,12 @@ class VideoWidget extends StatelessWidget {
 
   Widget _thumnail() {
     return Container(
-      height: 250,
+      height: 200,
       color: Colors.grey.withOpacity(0.3),
+      child: Image.network(
+        video.snippet.thumbnails.medium.url,
+        fit: BoxFit.fitWidth,
+      ),
     );
   }
 
@@ -42,7 +53,7 @@ class VideoWidget extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "유튜브 다시 보기 유튜브 다시 보기 유튜브 다시 보기 유튜브 다시 보기 유튜브 다시 보기",
+                        video.snippet.title,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                       ),
@@ -60,7 +71,7 @@ class VideoWidget extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      'Junewoo Park',
+                      video.snippet.channelTitle,
                       style: TextStyle(
                           fontSize: 10, color: Colors.black.withOpacity(0.8)),
                     ),
@@ -72,7 +83,8 @@ class VideoWidget extends StatelessWidget {
                     ),
                     Text(" · "),
                     Text(
-                      '2021-02-13',
+                      DateFormat("yyyy-MM-dd")
+                          .format(video.snippet.publishTime),
                       style: TextStyle(
                           fontSize: 10, color: Colors.black.withOpacity(0.6)),
                     ),

@@ -100,7 +100,7 @@ class YoutubeDetail extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _bottomOne("like", "1000"),
-        _bottomOne("disklike", "0"),
+        _bottomOne("dislike", "0"),
         _bottomOne("share", "공유"),
         _bottomOne("save", "저장"),
       ],
