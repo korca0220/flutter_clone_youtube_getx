@@ -37,7 +37,7 @@ class _VideoWidgetState extends State<VideoWidget> {
 
   Widget _thumnail() {
     return Container(
-      height: 200,
+      height: MediaQuery.of(context).size.height * 0.32,
       color: Colors.grey.withOpacity(0.3),
       child: Image.network(
         widget.video.snippet.thumbnails.medium.url,
