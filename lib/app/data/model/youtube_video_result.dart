@@ -10,7 +10,7 @@ class YoutubeVideoResult {
     this.totalResults = 0,
     this.resultsPerPage = 0,
     this.nextPageToken = "",
-    this.items = const <Video>[],
+    this.items = const [],
   });
 
   factory YoutubeVideoResult.fromJson(Map<dynamic, dynamic> json) {

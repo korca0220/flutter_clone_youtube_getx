@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clone_youtube_getx/app/controller/video_controller.dart';
 import 'package:flutter_clone_youtube_getx/app/data/model/video.dart';
@@ -36,14 +37,20 @@ class _VideoWidgetState extends State<VideoWidget> {
   }
 
   Widget _thumnail() {
-    return Container(
-      height: MediaQuery.of(context).size.height * 0.32,
-      color: Colors.grey.withOpacity(0.3),
-      child: Image.network(
-        widget.video.snippet.thumbnails.medium.url,
-        fit: BoxFit.fitWidth,
-      ),
-    );
+    return Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+      Container(
+          color: Colors.grey.withOpacity(0.3),
+          child: CachedNetworkImage(
+            imageUrl: widget.video.snippet.thumbnails.medium.url,
+            placeholder: (context, url) => Container(
+              height: MediaQuery.of(context).size.height * 0.31,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+            fit: BoxFit.fitWidth,
+          )),
+    ]);
   }
 
   Widget _simpleDetailInfo() {
@@ -55,10 +62,8 @@ class _VideoWidgetState extends State<VideoWidget> {
             () => CircleAvatar(
               radius: 25,
               backgroundColor: Colors.grey.withOpacity(0.5),
-              backgroundImage: Image.network(
-                _videoController!.youtuberThumbnailUrl,
-                fit: BoxFit.cover,
-              ).image,
+              backgroundImage:
+                  Image.network(_videoController!.youtuberThumbnailUrl).image,
             ),
           ),
           SizedBox(width: 15),

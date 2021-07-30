@@ -12,9 +12,9 @@ class YoutubeRepository extends GetConnect {
     super.onInit();
   }
 
-  loadVideos() async {
+  loadVideos(String? nextPageToken) async {
     String url =
-        "/youtube/v3/search?part=snippet&channelId=UCbMGBIayK26L4VaFrs5jyBw&maxResults=10&order=date&type=video&videoDefinition=high&key=AIzaSyDaNXxR6b_Sx1j4zb1ouAa5eFl9-5IdOUs";
+        "/youtube/v3/search?part=snippet&channelId=UCbMGBIayK26L4VaFrs5jyBw&maxResults=10&order=date&type=video&videoDefinition=high&key=AIzaSyDaNXxR6b_Sx1j4zb1ouAa5eFl9-5IdOUs&pageToken=$nextPageToken";
     final response = await get(url);
     if (response.status.hasError) {
       return Future.error(response.statusText.toString());
