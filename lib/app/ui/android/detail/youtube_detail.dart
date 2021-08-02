@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clone_youtube_getx/app/controller/detail/youtube_detail_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class YoutubeDetail extends StatelessWidget {
+class YoutubeDetail extends GetView<YoutubeDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,9 +13,34 @@ class YoutubeDetail extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Container(
-            height: 250,
-            color: Colors.grey.withOpacity(0.5),
+          YoutubePlayer(
+            controller: controller.playerController,
+            showVideoProgressIndicator: true,
+            progressIndicatorColor: Colors.redAccent,
+            topActions: <Widget>[
+              const SizedBox(width: 8.0),
+              Expanded(
+                child: Text(
+                  controller.playerController.metadata.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+              ),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                  size: 25.0,
+                ),
+              ),
+            ],
+            onReady: () {},
+            onEnded: (data) {},
           ),
           Expanded(
             child: _description(),
@@ -46,7 +74,7 @@ class YoutubeDetail extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            '개발하는 남자 유튜브 영상 다시보기',
+            controller.title,
             style: TextStyle(
               fontSize: 15,
             ),
@@ -54,7 +82,7 @@ class YoutubeDetail extends StatelessWidget {
           Row(
             children: <Widget>[
               Text(
-                '조회수 100회',
+                '조회수 ${controller.viewCount}회',
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.black.withOpacity(0.5),
@@ -62,7 +90,7 @@ class YoutubeDetail extends StatelessWidget {
               ),
               Text(" · "),
               Text(
-                '2021-02-03',
+                controller.publishedTime,
                 style: TextStyle(
                   fontSize: 13,
                   color: Colors.black.withOpacity(0.5),
@@ -79,8 +107,8 @@ class YoutubeDetail extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       child: Text(
-        "안녕하세요? 저는 저입니다",
-        style: TextStyle(fontSize: 14),
+        controller.discription,
+        style: TextStyle(fontSize: 16),
       ),
     );
   }
@@ -98,8 +126,8 @@ class YoutubeDetail extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _bottomOne("like", "1000"),
-        _bottomOne("dislike", "0"),
+        _bottomOne("like", controller.likeCount),
+        _bottomOne("dislike", controller.dislikeCount),
         _bottomOne("share", "공유"),
         _bottomOne("save", "저장"),
       ],
@@ -115,7 +143,7 @@ class YoutubeDetail extends StatelessWidget {
             radius: 25,
             backgroundColor: Colors.grey.withOpacity(0.5),
             backgroundImage: Image.network(
-              "https://yt3.ggpht.com/yti/APfAmoG9Z6GyerJlMhoi1lnfy7GBQl6oCeSLL3CfDg=s88-c-k-c0x00ffffff-no-rj-mo",
+              controller.youtuberThumbnailUrl,
               fit: BoxFit.cover,
             ).image,
           ),
@@ -125,11 +153,11 @@ class YoutubeDetail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  "Junewoo park",
+                  controller.youtuberName,
                   style: TextStyle(fontSize: 18),
                 ),
                 Text(
-                  "구독자 1000",
+                  "구독자 ${controller.subscriberCount}",
                   style: TextStyle(
                       fontSize: 14, color: Colors.black.withOpacity(0.6)),
                 ),

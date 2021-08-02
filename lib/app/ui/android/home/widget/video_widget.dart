@@ -16,7 +16,7 @@ class VideoWidget extends StatefulWidget {
 }
 
 class _VideoWidgetState extends State<VideoWidget> {
-  VideoController? _videoController;
+  late VideoController _videoController;
   @override
   void initState() {
     _videoController = Get.put(VideoController(video: widget.video),
@@ -63,7 +63,7 @@ class _VideoWidgetState extends State<VideoWidget> {
               radius: 25,
               backgroundColor: Colors.grey.withOpacity(0.5),
               backgroundImage:
-                  Image.network(_videoController!.youtuberThumbnailUrl).image,
+                  Image.network(_videoController.youtuberThumbnailUrl).image,
             ),
           ),
           SizedBox(width: 15),
@@ -99,7 +99,7 @@ class _VideoWidgetState extends State<VideoWidget> {
                     ),
                     Text(" · "),
                     Text(
-                      '조회수 ${_videoController!.viewCountString}회',
+                      '조회수 ${_videoController.viewCountString}회',
                       style: TextStyle(
                           fontSize: 10, color: Colors.black.withOpacity(0.6)),
                     ),
