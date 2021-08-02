@@ -22,10 +22,11 @@ class Statistics {
 
   factory Statistics.fromJson(Map<String, dynamic> json) => Statistics(
         viewCount: json["viewCount"],
-        likeCount: json["likeCount"],
-        dislikeCount: json["dislikeCount"],
-        favoriteCount: json["favoriteCount"],
-        commentCount: json["commentCount"],
+        likeCount: json["likeCount"] == null ? "" : json["likeCount"],
+        dislikeCount: json["dislikeCount"] == null ? "" : json["dislikeCount"],
+        favoriteCount:
+            json["favoriteCount"] == null ? "" : json["favoriteCount"],
+        commentCount: json["commentCount"] == null ? "" : json["commentCount"],
       );
 
   Map<String, dynamic> toJson() => {

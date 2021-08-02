@@ -39,11 +39,11 @@ class YoutuberSnippet {
       YoutuberSnippet(
         title: json["title"],
         description: json["description"],
-        customUrl: json["customUrl"],
+        customUrl: json["customUrl"] == null ? "" : json["customUrl"],
         publishedAt: DateTime.parse(json["publishedAt"]),
         thumbnails: Thumbnails.fromJson(json["thumbnails"]),
         localized: Localized.fromJson(json["localized"]),
-        country: json["country"],
+        country: json["country"] == null ? "" : json["country"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -117,9 +117,12 @@ class YoutuberStatistics {
   factory YoutuberStatistics.fromJson(Map<String, dynamic> json) =>
       YoutuberStatistics(
         viewCount: json["viewCount"],
-        subscriberCount: json["subscriberCount"],
-        hiddenSubscriberCount: json["hiddenSubscriberCount"],
-        videoCount: json["videoCount"],
+        subscriberCount:
+            json["subscriberCount"] == null ? "" : json["subscriberCount"],
+        hiddenSubscriberCount: json["hiddenSubscriberCount"] == null
+            ? ""
+            : json["hiddenSubscriberCount"],
+        videoCount: json["videoCount"] == null ? "" : json["videoCount"],
       );
 
   Map<String, dynamic> toJson() => {

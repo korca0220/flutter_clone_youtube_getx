@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clone_youtube_getx/app/routes/app_pages.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class CustomAppBar extends StatelessWidget {
   @override
@@ -30,23 +32,25 @@ class CustomAppBar extends StatelessWidget {
         GestureDetector(
           onTap: () {},
           child: Container(
-            width: 23,
-            height: 23,
+            width: 25,
+            height: 25,
             child: SvgPicture.asset("assets/svg/icons/bell.svg"),
           ),
         ),
-        SizedBox(width: 10),
+        SizedBox(width: 15),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(Routes.SEARCH);
+          },
           child: Container(
-            width: 30,
-            height: 30,
+            width: 33,
+            height: 33,
             child: SvgPicture.asset("assets/svg/icons/search.svg"),
           ),
         ),
-        SizedBox(width: 10),
+        SizedBox(width: 15),
         CircleAvatar(
-          radius: 16,
+          radius: 18,
           backgroundColor: Colors.grey.withOpacity(0.5),
           backgroundImage: Image.network(
             "https://yt3.ggpht.com/yti/APfAmoG9Z6GyerJlMhoi1lnfy7GBQl6oCeSLL3CfDg=s88-c-k-c0x00ffffff-no-rj-mo",
